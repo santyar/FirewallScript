@@ -1,5 +1,5 @@
 #!/bin/bash
-ERROR_NOT_COREKT=101
+ERROR_NOT_CORECT=101
 ERROR_ALREADY=100
 
 if [ $# -ne 2 ]; then
@@ -25,4 +25,4 @@ fi
 if iptables -I INPUT -m iprange --src-range ${first}-${last} -j DROP ; then
  echo "This range sucseful input for Firewall"
 fi
-iptables -L INPUT -v -n
+#iptables -L INPUT -v -n
