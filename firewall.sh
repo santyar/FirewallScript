@@ -21,14 +21,14 @@ fi
 printf "First:${first}\n"
 printf "second:${last}\n"
 
-if iptables -L OUTPUT -v -n|grep $first > /dev/null ; then
- echo "Firs ip already present in Firewall "
+if iptables -L OUTPUT|grep $first-$last > /dev/null ; then
+ echo "This ip range already present in Firewall "
  exit 1
 fi
-if iptables -L OUTPUT -v -n|grep $last > /dev/null ; then
- echo "Last ip allready present in Firewall"
- exit 1
-fi
+#if iptables -L OUTPUT -v -n|grep $last > /dev/null ; then
+ #echo "Last ip allready present in Firewall"
+ #exit 1
+#fi
 
 if iptables -I OUTPUT -m iprange --src-range ${first}-${last} -j DROP ; then
  echo "This range sucseful input for Firewall"
