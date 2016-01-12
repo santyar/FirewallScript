@@ -2,14 +2,22 @@
 ERROR_NOT_CORECT=101
 ERROR_ALREADY=100
 
-if [ $# -ne 2 ]; then
- echo "Scripts $0 has Error:$ERROR_NOT_COREKT"
+if [[ $# -ne 2 && $# -ne 3 ]]; then
+ echo "Scripts $0 has Error:$ERROR_NOT_CORECT"
+ echo "$#"
  exit 1
 else
 	first=$1
 	last=$2
+	command=$3
 fi
 
+if [ "$command" == D ]; then
+	if iptables -D OUTPUT -m iprange --src-range ${first}-${last} -j DROP ; then
+	echo "Range ${first}:${last} was deleted"
+	exit 0
+	fi
+fi
 printf "First:${first}\n"
 printf "second:${last}\n"
 
